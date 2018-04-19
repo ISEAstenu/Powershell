@@ -1,0 +1,1 @@
+get-service "StorageCraft ImageManager"| where {$_.status -eq 'running'} | stop-service -pass

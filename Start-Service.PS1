@@ -1,0 +1,1 @@
+get-service "StorageCraft ImageManager" | start-service -pass
