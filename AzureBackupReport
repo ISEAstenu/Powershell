@@ -1,22 +1,20 @@
 #This script will send email notifications based on the most recent 4 Backup event ID's in event log.
 
-#Created by Phillip Anderson 29/05/2018
-
 #Instructions
 #Only Edit the 2 Lines below starting with $ Quotation marks required.
 
 #Modify the SMTP server
 $SMTP = "SMTPServer"
-$EmailFrom = "backup@domain.com"
+$EmailFrom = "administrator@Domain.com.au"
 
 #retrieve the Computer name the script is running on
 $mailSubject = "[$([environment]::machinename)] "
 
 #Query Windows backup event logs for 4 most recent entrys
-$events = Get-WinEvent "CloudBackup" |? {$_.timecreated -gt ([DateTime]::Now).AddHours(-23)}
-
+$eventsBody = Get-WinEvent "CloudBackup" |? {$_.timecreated -gt ([DateTime]::Now).AddHours(-23)}
+$events = Get-WinEvent "CloudBackup" | Select-Object -first 9
 #Convert event log output to table format
-$result = $events | select id,timecreated,message | ft -wrap -AutoSize | out-string 
+$result = $eventsBody | select id,timecreated,message | ft -wrap -AutoSize | out-string 
 
 $events |% { 
 if ($_.id -eq 3) {$mailSubject += "BACKUP SUCCESS - The backup operation has completed. " } 
@@ -26,8 +24,8 @@ Elseif ($_.id -eq 5) { $mailSubject += "ENCRYPTION KEY EXPIRED - Encryption key 
 Elseif ($_.id -eq 6) { $mailSubject += "MACHINE REGISTERED - The machine has been registered with Azure Backup service successfully " } 
 Elseif ($_.id -eq 7) { $mailSubject += "POLICY CHANGED - The Online schedule backup policy has been changed " } 
 Elseif ($_.id -eq 8) { $mailSubject += "MACHINE UNREGISTERED - The machine has been unregistered from the Azure Backup service successfully " } 
-Elseif ($_.id -eq 9) { $mailSubject += "POLICY_DELETED - A Online scheduled backup policy  has been deleted " } 
-Elseif ($_.id -eq 10) { $mailSubject += "BACKUP_WARNING - The backup operation has completed with warnings. " } 
+Elseif ($_.id -eq 9) { $mailSubject += "POLICY DELETED - A Online scheduled backup policy  has been deleted " } 
+Elseif ($_.id -eq 10) { $mailSubject += "BACKUP WARNING - The backup operation has completed with warnings. " } 
 Elseif ($_.id -eq 11) { $mailSubject += "BACKUP ERROR - The backup operation has completed with errors. " } 
 Elseif ($_.id -eq 12) { $mailSubject += "RECOVERY WARNING - The recovery operation has completed   with warnings. " } 
 Elseif ($_.id -eq 13) { $mailSubject += "RECOVERY ERROR - The recovery operation has completed   with errors." } 
