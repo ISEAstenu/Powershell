@@ -1,0 +1,122 @@
+{
+  "elmType": "div",
+  "style": {
+    "padding": "0 4px"
+  },
+  "attributes": {
+    "class": {
+      "operator": ":",
+      "operands": [
+        {
+          "operator": "==",
+          "operands": [
+            "@currentField",
+            ""
+          ]
+        },
+        "",
+        {
+          "operator": ":",
+          "operands": [
+            {
+              "operator": "<",
+              "operands": [
+                {
+                  "operator": "Date()",
+                  "operands": [
+                    {
+                      "operator": "toDateString()",
+                      "operands": [
+                        "@currentField"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "operator": "Date()",
+                  "operands": [
+                    {
+                      "operator": "toDateString()",
+                      "operands": [
+                        "@now"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "sp-css-backgroundColor-successBackground50",
+            {
+              "operator": ":",
+              "operands": [
+                {
+                  "operator": "==",
+                  "operands": [
+                    {
+                      "operator": "Date()",
+                      "operands": [
+                        {
+                          "operator": "toDateString()",
+                          "operands": [
+                            "@currentField"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "operator": "Date()",
+                      "operands": [
+                        {
+                          "operator": "toDateString()",
+                          "operands": [
+                            "@now"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "sp-css-backgroundColor-successBackground",
+                {
+                  "operator": ":",
+                  "operands": [
+                    {
+                      "operator": ">",
+                      "operands": [
+                        {
+                          "operator": "Date()",
+                          "operands": [
+                            {
+                              "operator": "toDateString()",
+                              "operands": [
+                                "@currentField"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "operator": "Date()",
+                          "operands": [
+                            {
+                              "operator": "toDateString()",
+                              "operands": [
+                                "@now"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "sp-css-backgroundColor-errorBackground",
+                    ""
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "txtContent": "@currentField"
+}
